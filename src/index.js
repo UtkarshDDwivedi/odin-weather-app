@@ -59,10 +59,19 @@ locationForm.addEventListener("submit", async (e) => {
 		descriptionDiv.classList.add("description");
 		descriptionDiv.textContent = description;
 
-		let temperature = weatherData.days[0].temp;
+		let temperatureF = weatherData.days[0].temp;
 		let temperatureDiv = document.createElement("div");
 		temperatureDiv.classList.add("temperature");
-		temperatureDiv.textContent = temperature + "℃";
+		temperatureDiv.textContent = temperatureF + "℉";
+
+		temperatureDiv.addEventListener("click", () => {
+            if (temperatureDiv.textContent.includes("℉")) {
+                let tempC = (temperatureF - 32) * 5 / 9;
+                temperatureDiv.textContent = Math.round(tempC) + "℃";
+            } else {
+                temperatureDiv.textContent = Math.round(temperatureF) + "℉";
+            }
+        });
 
 		let humidity = weatherData.days[0].humidity;
 		let humidityDiv = document.createElement("div");
